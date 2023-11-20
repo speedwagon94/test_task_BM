@@ -34,6 +34,8 @@ async def process_message(message, db_session):
             session.commit()
     except Exception as e:
         logger.error(f"Ошибка обработки сообщения: {e}")
+
+
 async def consume_messages(connection, db_session):
     # Потребление сообщений из очереди
     async with connection:
@@ -47,6 +49,8 @@ async def consume_messages(connection, db_session):
             finally:
                 await message.ack()
         await queue.consume(callback)
+
+
 async def publish_message(item: Item):
     # Публикация сообщения в очередь
     try:
@@ -58,6 +62,7 @@ async def publish_message(item: Item):
             await channel.default_exchange.publish(message, routing_key="text_queue")
     except Exception as e:
         logger.error(f"Ошибка при публикации сообщения: {e}")
+        
 async def consume_messages_background(connection, db_session):
     # Асинхронный фоновый процесс потребления сообщений
     while True:
