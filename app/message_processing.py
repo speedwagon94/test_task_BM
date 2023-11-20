@@ -14,7 +14,7 @@ load_dotenv()
 
 # Загрузка переменных окружения из файла .env
 BROKER_URL = f"pyamqp://{os.getenv('RABBITMQ_DEFAULT_USER')}:{os.getenv('RABBITMQ_DEFAULT_PASS')}@localhost:5672"
-BROKER_URL =  os.getenv('BROKER_URL')
+
 # Конфигурация логгера
 logger = configure_logger()
 
