@@ -63,6 +63,7 @@ async def publish_message(item: Item):
     except Exception as e:
         logger.error(f"Ошибка при публикации сообщения: {e}")
         
+        
 async def consume_messages_background(connection, db_session):
     # Асинхронный фоновый процесс потребления сообщений
     while True:
