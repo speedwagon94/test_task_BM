@@ -22,13 +22,19 @@ async def process_message(message, db_session):
     # Обработка сообщения из очереди
     try:
         item = Item.parse_raw(message.body)
-        cyrillic_x_count = item.text.lower().count("х")
+        
+        lines = item.text.split('\n')
+
+        count_x = sum(line.lower().count('х') for line in lines)
+        cyrillic_x_count = count_x / len(lines) if len(lines) > 0 else 0
+
         datetime_obj = datetime.strptime(item.datetime, "%d.%m.%Y %H:%M:%S.%f")
         result = Result(
             title=item.title,
             x_avg_count_in_line=cyrillic_x_count,
             datetime=datetime_obj
         )
+
         with db_session() as session:
             session.add(result)
             session.commit()
