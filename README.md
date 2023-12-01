@@ -10,10 +10,7 @@ python -m venv venv
 # Для Unix-подобных систем:
 source venv/bin/activate
 
-# 3. Установка зависимостей
-pip install -r requirements.txt
-
-# 4. Добавьте ключи в файл .env
+# 3. Добавьте ключи в файл .env
 
 
 # 5. Сборка Docker-образа
@@ -21,7 +18,3 @@ docker build -t x_avg_count .
 
 # 6. Сборка Docker-контейнера с использованием Docker Compose
 docker-compose build
-
-# 7. Запуск Docker-контейнера
-docker-compose up
-
